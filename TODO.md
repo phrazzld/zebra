@@ -80,7 +80,7 @@
         3. Commit compliant code; verify commit succeeds.
     - **Depends‑on:** [T005, T006]
 
-- [ ] **T008 · Test · P0: create CI job for rustfmt check**
+- [x] **T008 · Test · P0: create CI job for rustfmt check**
     - **Context:** PLAN.md - Phase 3: Integrate into CI Pipeline (Format Job)
     - **Action:**
         1. Create/update `.github/workflows/rust_quality.yml`.
