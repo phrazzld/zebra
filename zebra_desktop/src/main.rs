@@ -8,8 +8,8 @@ use dioxus::prelude::*;
 use dioxus_desktop::WindowBuilder;
 use dioxus_free_icons::{
     icons::go_icons::{
-        GoCheck, GoCopy, GoPlusCircle, GoSearch, GoShieldCheck, GoShieldLock, GoTrash, GoUnverified,
-        GoVerified,
+        GoCheck, GoCopy, GoPlusCircle, GoSearch, GoShieldCheck, GoShieldLock, GoTrash,
+        GoUnverified, GoVerified,
     },
     Icon,
 };
@@ -1329,6 +1329,6 @@ fn Verify() -> Element {
             div {
                 class: "data",
             }
-        }
+        },
     }
 }

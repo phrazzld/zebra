@@ -1,6 +1,6 @@
-use wasm_bindgen::prelude::*;
-use zebra_crypto::{SignedMessage};
 use std::str::FromStr;
+use wasm_bindgen::prelude::*;
+use zebra_crypto::SignedMessage;
 
 #[cfg(feature = "wee_alloc")]
 #[global_allocator]
@@ -24,4 +24,3 @@ extern "C" {
 pub fn greet() {
     alert("Hello, wasm-test!");
 }
-

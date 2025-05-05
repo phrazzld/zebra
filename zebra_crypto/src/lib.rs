@@ -223,7 +223,9 @@ impl BorshDeserialize for Identity {
 /// messages. Each element of this enum corresponds to an ASCII string via the listed constants,
 /// and cannot contain angle bracket characters for the public key format to be parsable. Newlines
 /// and other whitespace or control characters are also not allowed, while spaces are ok.
-#[derive(Clone, PartialEq, Eq, PartialOrd, Ord, Zeroize, ZeroizeOnDrop, BorshSerialize, BorshDeserialize)]
+#[derive(
+    Clone, PartialEq, Eq, PartialOrd, Ord, Zeroize, ZeroizeOnDrop, BorshSerialize, BorshDeserialize,
+)]
 #[borsh(use_discriminant = true)]
 #[repr(u8)]
 enum ZebraVersion {
@@ -350,8 +352,8 @@ impl PublicKey {
 // direction, it's never clear when the name ends. The string must *end* with the fixed-sized hex
 // ascii attestation and public key, just before that is a version string enclosed by angle brackts,
 // and just before that is an email address that cannot contain spaces, in turn preceded by a space
-// character. Thus, this encoding is bijective and unambiguous in both directions. Also, because the 
-// name, email address and version string cannot contain newlines, we can encode lists of public keys 
+// character. Thus, this encoding is bijective and unambiguous in both directions. Also, because the
+// name, email address and version string cannot contain newlines, we can encode lists of public keys
 // as newline-separated strings.
 impl From<PublicKey> for String {
     fn from(k: PublicKey) -> String {
@@ -376,7 +378,10 @@ impl FromStr for PublicKey {
         use regex::Regex;
         // This regex should exactly match the description above, and not allow any matches that
         // don't fit the pattern described. Fortunately it's pretty simple.
-        let re = match Regex::new(&format!(r"^\[([^\n]*) <([!-~]*)> <{}> ([0-9A-F]{{64}}) ([0-9A-F]{{200}})\]$", ZEBRA_ONE_BETA)) {
+        let re = match Regex::new(&format!(
+            r"^\[([^\n]*) <([!-~]*)> <{}> ([0-9A-F]{{64}}) ([0-9A-F]{{200}})\]$",
+            ZEBRA_ONE_BETA
+        )) {
             Ok(re) => re,
             Err(_) => return Err(()),
         };
@@ -584,7 +589,8 @@ impl SignedMessage {
 // that specific library. The implementation can be seen here:
 // https://github.com/decafbad/z85/blob/ca669a0682b0a559b883f770c93e746f6a7e3ebe/src/internal.rs#L51
 
-const SIGNED_MESSAGE_FIRST_LINE: &str = "The following message has been signed using ZebraSign 1.0 Beta:";
+const SIGNED_MESSAGE_FIRST_LINE: &str =
+    "The following message has been signed using ZebraSign 1.0 Beta:";
 const SIGNED_MESSAGE_SECOND_LINE: &str = "\"\"\"";
 const SIGNED_MESSAGE_INFIX_FIRST_LINE: &str = "\"\"\"";
 const SIGNED_MESSAGE_INFIX_SECOND_LINE: &str = "";

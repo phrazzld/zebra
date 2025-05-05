@@ -19,7 +19,7 @@
         1. Command executed and results documented.
     - **Depends‑on:** none
 
-- [ ] **T003 · Refactor · P1: fix existing formatting issues**
+- [x] **T003 · Refactor · P1: fix existing formatting issues**
     - **Context:** PLAN.md - Preparation / Risk Assessment (Implied)
     - **Action:**
         1. Run `cargo fmt --all` across the workspace based on findings from T001.
