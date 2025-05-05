@@ -242,9 +242,11 @@ impl From<&ZebraVersion> for String {
     }
 }
 
-impl ToString for ZebraVersion {
-    fn to_string(&self) -> String {
-        From::from(self)
+// Instead of implementing ToString directly, we implement Display
+// and let the standard library provide ToString automatically
+impl std::fmt::Display for ZebraVersion {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", String::from(self))
     }
 }
 
@@ -365,7 +367,7 @@ impl From<PublicKey> for String {
             "[{} <{}> <{}> {} {}]",
             k.holder.name,
             k.holder.email,
-            k.version.to_string(),
+            k.version,
             hex::encode_upper(k.keypoint.compress()),
             hex::encode_upper(buffer)
         )
@@ -479,8 +481,8 @@ impl SignedMessage {
         // by including both in the ring.
         let other_keys = other_keys
             .iter()
+            .filter(|&k| k != &my_public_key)
             .cloned()
-            .filter(|k| k != &my_public_key)
             .collect::<Vec<_>>();
 
         let sig = Signature::sign(

@@ -131,6 +131,7 @@ impl Database {
             .read(true)
             .write(true)
             .create(true)
+            .truncate(true)
             .open(lockfile_path(&path))?;
         // we never return this lock. The operating system will release it when the file is closed, as
         // the program dies.
@@ -152,6 +153,7 @@ impl Database {
 
         let file = OpenOptions::new()
             .create(true)
+            .truncate(false)  // Don't truncate as we check if it's empty below
             .read(true)
             .write(true)
             .open(path)?;

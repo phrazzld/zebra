@@ -9,11 +9,13 @@ crate-type = ["cdylib", "rlib"]
 
 [features]
 default = []
+wee_alloc = ["dep:wee_alloc"]
 
 [dependencies]
 wasm-bindgen = "0.2.84"
 getrandom = { version = "0.2.12", features = ["js"] }
 zebra_crypto = { path = "../zebra_crypto" }
+wee_alloc = { version = "0.4.5", optional = true }
 
 [profile.release]
 # Tell `rustc` to optimize for small code size.

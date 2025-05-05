@@ -51,7 +51,7 @@
         1. Run `cargo fmt --all --check` passes on code known to be formatted correctly.
     - **Depends‑on:** none
 
-- [ ] **T006 · Chore · P0: define and document clippy configuration and allowances**
+- [x] **T006 · Chore · P0: define and document clippy configuration and allowances**
     - **Context:** PLAN.md - Phase 1: Configure Formatting and Linting Tools
     - **Action:**
         1. Define the strict clippy command (e.g., `cargo clippy --all-targets --all-features --workspace -- -D warnings`).

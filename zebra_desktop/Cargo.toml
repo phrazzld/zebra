@@ -4,6 +4,10 @@ description = "A tool for creating and verifying ring signatures."
 version = "1.0.0-alpha"
 edition = "2021"
 
+[features]
+default = []
+debug = []
+
 [lib]
 name = "zebra"
 path = "src/lib.rs"

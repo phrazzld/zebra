@@ -1,5 +1,6 @@
 use age::secrecy::SecretString;
 
+#[cfg(all(not(target_os = "android"), not(feature = "debug")))]
 use crate::dbfile_utils::{get_username, SERVICE_NAME};
 
 // On Linux, it's important that this uses the SecretService backend, since the keyutils storage

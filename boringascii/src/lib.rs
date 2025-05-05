@@ -1,6 +1,15 @@
 use borsh::{BorshDeserialize, BorshSerialize};
 use zeroize::{Zeroize, ZeroizeOnDrop};
 
+// ALLOWANCE: Implementing Hash while also implementing Borrow<str> and Borrow<[u8]> is
+// normally unsafe, as hash(&key) != hash(key.borrow()) would violate Borrow's contract.
+// However, BoringAscii ensures that its contents are always valid ASCII. Since ASCII
+// has the same bit representation in UTF-8 and raw bytes, and since BoringAscii's 
+// constructor rigorously validates all input, the Hash semantics are preserved
+// regardless of whether we view the content as &str or &[u8].
+//
+// This allowance has been documented in the project's clippy.toml file.
+#[allow(clippy::impl_hash_borrow_with_str_and_bytes)]
 /// A string of bytes that is impossible to construct with any non-ASCII, non-printable, or
 /// whitespace characters. This is mainly useful as a brute-force solution to avoid homoglyph
 /// attacks.
@@ -140,13 +149,13 @@ mod tests {
 
     #[test]
     fn it_works() {
-        assert!(BoringAscii::from_bytes("😊".as_bytes()) == None);
-        assert!(BoringAscii::from_bytes(&[b'\0']) == None);
-        assert!(BoringAscii::from_bytes(&[b'\x7f']) == None);
-        assert!(BoringAscii::from_bytes(&[b'\x1f']) == None);
-        assert!(BoringAscii::from_bytes(&[b' ']) == None);
-        assert!(BoringAscii::from_bytes(&[b'\n']) == None);
+        assert!(BoringAscii::from_bytes("😊".as_bytes()).is_none());
+        assert!(BoringAscii::from_bytes(b"\0").is_none());
+        assert!(BoringAscii::from_bytes(b"\x7f").is_none());
+        assert!(BoringAscii::from_bytes(b"\x1f").is_none());
+        assert!(BoringAscii::from_bytes(b" ").is_none());
+        assert!(BoringAscii::from_bytes(b"\n").is_none());
         assert!(BoringAscii::from_bytes("Hi".as_bytes()) == Some(BoringAscii(b"Hi".to_vec())));
-        assert!(BoringAscii::from_bytes(&[b'!']) == Some(BoringAscii(b"!".to_vec())));
+        assert!(BoringAscii::from_bytes(b"!") == Some(BoringAscii(b"!".to_vec())));
     }
 }
