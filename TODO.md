@@ -28,7 +28,7 @@
         1. `cargo fmt --all --check` passes on the `main` branch using the config from T005.
     - **Depends‑on:** [T001, T005]
 
-- [ ] **T004 · Refactor · P1: fix existing linting issues**
+- [x] **T004 · Refactor · P1: fix existing linting issues**
     - **Context:** PLAN.md - Preparation / Risk Assessment (Implied)
     - **Action:**
         1. Address lint violations identified in T002 by fixing code.
