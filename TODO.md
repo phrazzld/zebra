@@ -39,7 +39,7 @@
     - **Depends‑on:** [T002, T006]
 
 ## Code Quality Automation - Configuration
-- [ ] **T005 · Chore · P0: configure rustfmt settings**
+- [x] **T005 · Chore · P0: configure rustfmt settings**
     - **Context:** PLAN.md - Phase 1: Configure Formatting and Linting Tools
     - **Action:**
         1. Create or update `.rustfmt.toml` in the repository root.

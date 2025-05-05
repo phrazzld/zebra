@@ -1,0 +1,23 @@
+# Rustfmt configuration for the ZebraSign project
+
+# Settings defined in task T005
+edition = "2021"
+max_width = 100
+
+# Additional stable formatting settings for better readability
+
+# Indentation settings
+tab_spaces = 4              # Number of spaces per indentation level
+hard_tabs = false           # Use spaces rather than tabs for indentation
+
+# Reordering
+reorder_imports = true      # Sort imports alphabetically
+
+# Miscellaneous
+use_field_init_shorthand = true   # Use field init shorthand when possible
+use_small_heuristics = "Default"  # Applies sensible formatting of function calls, params, etc.
+newline_style = "Unix"            # Unix-style line endings (LF)
+
+# Note: Many additional rustfmt options are only available on the nightly channel.
+# If the project later decides to use rustfmt with the nightly toolchain, 
+# additional options can be enabled for more control over formatting.
