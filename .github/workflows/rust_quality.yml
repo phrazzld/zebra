@@ -27,3 +27,21 @@ jobs:
       - name: Check Formatting
         run: cargo fmt --all --check
         # This uses the .rustfmt.toml configuration from the repository root
+
+  lint:
+    name: Check Linting
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+          components: clippy
+
+      - name: Run Clippy
+        run: cargo clippy --all-targets --all-features --workspace -- -D warnings
+        # This uses the clippy.toml configuration from the repository root

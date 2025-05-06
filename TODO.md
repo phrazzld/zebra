@@ -94,7 +94,7 @@
         2. Push branch with correct formatting; verify CI job passes.
     - **Depends‑on:** [T005]
 
-- [ ] **T009 · Test · P0: create CI job for clippy check**
+- [x] **T009 · Test · P0: create CI job for clippy check**
     - **Context:** PLAN.md - Phase 3: Integrate into CI Pipeline (Lint Job)
     - **Action:**
         1. Update `.github/workflows/rust_quality.yml`.
