@@ -1,6 +1,56 @@
-target
+# Rust build artifacts
+/target/
+**/*.rs.bk
+*.pdb
 
+# Cargo
+Cargo.lock
+!Cargo.lock
+
+# IDEs and editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Debug artifacts
+*.profraw
+flamegraph.svg
+
+# Environment
+.env
+.env.local
+*.local.rs
+
+# Generated documentation
+/docs/
+
+# Claude specific files
 **/.claude/settings.local.json
-
-docs/
 **/glance.md
+
+# Project management
+BACKLOG.md
+PLAN.md
+TODO.md
+*-plan.md
+
+# Temporary files
+*.tmp
+*.log
+.temp/
+
+# WASM build output
+*.wasm
+pkg/
+
+# Test artifacts
+/test_temp/
+
+# Desktop build artifacts
+*.app
+*.dmg
+*.exe
+*.msi
