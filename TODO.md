@@ -142,7 +142,7 @@
         1. `CONTRIBUTING.md` clearly details the code quality standards and procedures.
     - **Depends‑on:** [T005, T006, T007, T008, T009]
 
-- [ ] **T013 · Test · P1: test pre-commit hook functionality**
+- [x] **T013 · Test · P1: test pre-commit hook functionality**
     - **Context:** PLAN.md - Testing Strategy
     - **Action:**
         1. Attempt commits with deliberate formatting errors; verify rejection.
