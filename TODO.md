@@ -154,7 +154,7 @@
         1. Manual testing covering different violation scenarios.
     - **Depends‑on:** [T003, T004, T007]
 
-- [ ] **T014 · Test · P1: test CI pipeline functionality**
+- [x] **T014 · Test · P1: test CI pipeline functionality**
     - **Context:** PLAN.md - Testing Strategy
     - **Action:**
         1. Create a PR with formatting errors; verify `format` CI job fails.
@@ -166,7 +166,7 @@
         1. Check GitHub Actions logs and PR status checks for expected outcomes.
     - **Depends‑on:** [T003, T004, T008, T009]
 
-- [ ] **T015 · Test · P2: verify configuration consistency between pre-commit and CI**
+- [x] **T015 · Test · P2: verify configuration consistency between pre-commit and CI**
     - **Context:** PLAN.md - Testing Strategy
     - **Action:**
         1. Compare `rustfmt` settings used locally (T005) and in CI (T008).
@@ -176,24 +176,3 @@
         1. Configurations are confirmed to be identical or differences are justified and understood.
         2. Local and CI checks produce the same pass/fail results for the same code.
     - **Depends‑on:** [T007, T008, T009]
-
-## Code Quality Automation - Rollout
-- [ ] **T016 · Chore · P2: communicate changes and provide rollout support**
-    - **Context:** PLAN.md - Rollout
-    - **Action:**
-        1. Announce the new code quality standards and tooling to the development team.
-        2. Point team members to documentation (T011, T012) for setup and guidelines.
-        3. Be available to assist with `pre-commit` setup or troubleshooting.
-    - **Done‑when:**
-        1. Team is informed of the new standards and how to comply.
-    - **Depends‑on:** [T010, T011, T012]
-
----
-
-### Clarifications & Assumptions
-- [ ] **Issue:** Which specific clippy lints need to be allowed/suppressed project-wide, and what is the justification?
-    - **Context:** PLAN.md "Define Clippy Configuration"; Required for T004, T006, T007, T009, T012.
-    - **Blocking?:** yes (for completing T006 and subsequent dependent tasks accurately)
-- [ ] **Issue:** Are there specific files or directories (e.g., auto-generated code, vendor code) that should be excluded from formatting and/or linting checks?
-    - **Context:** PLAN.md (General Scope); Affects T003, T004, T007, T008, T009.
-    - **Blocking?:** no (can proceed with full checks initially, but clarification needed for optimal setup)

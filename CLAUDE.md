@@ -1,0 +1,29 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Build and Test Commands
+- Build: `cargo build --release`
+- Run desktop app: `cargo run --release`
+- Test: `cargo test`
+- Test specific crate: `cargo test -p zebra_crypto`
+- Test specific function: `cargo test -p zebra_crypto -- tests::basic_signatures_work`
+- Build WebAssembly: `cd zebra_wasm && wasm-pack build`
+- Build & run webapp: `cd zebra_webapp && npm install && npm run build && npm run start`
+
+## Code Style Guidelines
+- Use Rust Edition 2021 (minimum Rust 1.65)
+- Follow default Rust formatting and idioms
+- Security: Use `zeroize` and `ZeroizeOnDrop` for sensitive data
+- Error handling: Use `std::io::Error` with appropriate `ErrorKind`
+- Naming: Follow Rust standard camelCase for variables, PascalCase for types
+- Imports: Organize imports by standard library, then external crates, then local modules
+- Documentation: Thoroughly document public interfaces with /// comments
+- Memory safety: Minimize time private keys are in memory
+- Types: Use borsh serialization with explicit tags for forward compatibility
+- Testing: Write comprehensive tests for cryptographic code
+
+## Architecture
+- Crypto: Implements ring signatures using Ristretto group (based on Curve25519)
+- Storage: Uses age encryption with operating system keychain for DB protection
+- UI: Built with Dioxus (Rust web framework)
