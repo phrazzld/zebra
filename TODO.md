@@ -132,7 +132,7 @@
         1. Follow instructions on a clean clone; verify tools install and hooks activate correctly.
     - **Depends‑on:** [T007]
 
-- [ ] **T012 · Chore · P1: update CONTRIBUTING.md with code quality standards**
+- [x] **T012 · Chore · P1: update CONTRIBUTING.md with code quality standards**
     - **Context:** PLAN.md - Phase 4: Update Documentation
     - **Action:**
         1. Create or update `CONTRIBUTING.md`.
