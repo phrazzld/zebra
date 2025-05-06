@@ -65,7 +65,7 @@
     - **Depends‑on:** [T002]
 
 ## Code Quality Automation - Tooling Setup
-- [ ] **T007 · Feature · P0: implement pre-commit hooks for rustfmt and clippy**
+- [x] **T007 · Feature · P0: implement pre-commit hooks for rustfmt and clippy**
     - **Context:** PLAN.md - Phase 2: Implement Pre-commit Hooks
     - **Action:**
         1. Create `.pre-commit-config.yaml` in the repository root.

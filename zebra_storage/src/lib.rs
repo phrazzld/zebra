@@ -153,7 +153,7 @@ impl Database {
 
         let file = OpenOptions::new()
             .create(true)
-            .truncate(false)  // Don't truncate as we check if it's empty below
+            .truncate(false) // Don't truncate as we check if it's empty below
             .read(true)
             .write(true)
             .open(path)?;

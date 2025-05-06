@@ -130,12 +130,12 @@
           const fingerprintsElement = document.getElementById('fingerprints-table');
           messageElement.textContent = 'Valid Signature!';
           messageElement.className = 'message valid';
-          
+
           const messageStart = signature.indexOf('"""') + 3;
           const messageEnd = signature.lastIndexOf('"""');
           const message = signature.substring(messageStart, messageEnd).trim();
           document.getElementById('message-text').textContent = message;
-          
+
           const lines = signature.trim().split('\n');
           const fingerprints = [];
           for (let i = lines.length - 5; i > 5; i--) {
@@ -149,13 +149,13 @@
               });
             }
           }
-          
+
           let tableHTML = '<table><thead><tr><th>Name</th><th>Email</th><th>Fingerprint</th></tr></thead><tbody>';
           fingerprints.forEach(fp => {
             tableHTML += `<tr><td>${fp.name}</td><td>${fp.email}</td><td>${fp.fingerprint}</td></tr>`;
           });
           tableHTML += '</tbody></table>';
-          
+
           fingerprintsElement.innerHTML = tableHTML;
           document.getElementById('message-details').style.display = 'block';
         } else {

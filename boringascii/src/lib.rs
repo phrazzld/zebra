@@ -4,7 +4,7 @@ use zeroize::{Zeroize, ZeroizeOnDrop};
 // ALLOWANCE: Implementing Hash while also implementing Borrow<str> and Borrow<[u8]> is
 // normally unsafe, as hash(&key) != hash(key.borrow()) would violate Borrow's contract.
 // However, BoringAscii ensures that its contents are always valid ASCII. Since ASCII
-// has the same bit representation in UTF-8 and raw bytes, and since BoringAscii's 
+// has the same bit representation in UTF-8 and raw bytes, and since BoringAscii's
 // constructor rigorously validates all input, the Hash semantics are preserved
 // regardless of whether we view the content as &str or &[u8].
 //

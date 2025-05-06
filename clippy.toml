@@ -10,11 +10,11 @@
 # List of allowed lints with justification
 # ----------------------------------------
 # clippy::impl_hash_borrow_with_str_and_bytes:
-#   Allowed in boringascii/src/lib.rs because the BoringAscii type needs to be 
+#   Allowed in boringascii/src/lib.rs because the BoringAscii type needs to be
 #   usable in hash-based collections while also supporting borrowing as both
 #   &str and &[u8] for API convenience. This is safe because BoringAscii's
 #   constructor ensures that only valid ASCII is stored, making the &str and &[u8]
-#   views semantically equivalent for hashing purposes. The type is 
+#   views semantically equivalent for hashing purposes. The type is
 #   carefully constructed to ensure this invariant is maintained.
 
 # No disallowed_methods or disallowed_types specified currently

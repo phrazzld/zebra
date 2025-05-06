@@ -1,0 +1,39 @@
+# ZebraSign Pre-commit Configuration
+# This file configures pre-commit hooks to enforce code quality standards.
+# See https://pre-commit.com for more information about pre-commit.
+
+repos:
+  # Standard file format checks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+        description: "Remove trailing whitespace"
+      - id: end-of-file-fixer
+        description: "Make sure files end in a newline"
+      - id: check-yaml
+        description: "Validate YAML syntax"
+      - id: check-toml
+        description: "Validate TOML syntax"
+      - id: check-merge-conflict
+        description: "Check for files with merge conflict strings"
+
+  # Rust formatting using rustfmt
+  - repo: https://github.com/doublify/pre-commit-rust
+    rev: v1.0
+    hooks:
+      - id: fmt
+        name: "rustfmt: Format Rust code"
+        description: "Run rustfmt on Rust code"
+        args: ["--all", "--"]
+
+  # Rust linting using Clippy
+  - repo: local
+    hooks:
+      - id: clippy
+        name: "clippy: Lint Rust code"
+        description: "Run clippy on Rust code (with standard configuration)"
+        entry: bash -c 'cargo clippy --all-targets --all-features --workspace -- -D warnings'
+        language: system
+        files: \.rs$
+        pass_filenames: false

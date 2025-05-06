@@ -19,5 +19,5 @@ use_small_heuristics = "Default"  # Applies sensible formatting of function call
 newline_style = "Unix"            # Unix-style line endings (LF)
 
 # Note: Many additional rustfmt options are only available on the nightly channel.
-# If the project later decides to use rustfmt with the nightly toolchain, 
+# If the project later decides to use rustfmt with the nightly toolchain,
 # additional options can be enabled for more control over formatting.
