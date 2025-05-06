@@ -121,7 +121,7 @@
     - **Depends‑on:** [T008, T009]
 
 ## Code Quality Automation - Documentation & Testing
-- [ ] **T011 · Chore · P1: update README.md with setup instructions**
+- [x] **T011 · Chore · P1: update README.md with setup instructions**
     - **Context:** PLAN.md - Phase 4: Update Documentation
     - **Action:**
         1. Add/Update a "Development Prerequisites" section in `README.md`.

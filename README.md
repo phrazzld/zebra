@@ -84,6 +84,59 @@ well as the `sign` and `verify` functions in `zebra_crypto/lib.rs`.
 
 Everything else is the copyright of Kurt Brown.
 
+## Development Prerequisites
+
+Before you can build and contribute to ZebraSign, you'll need to set up your development environment:
+
+### Install Rust
+
+ZebraSign requires Rust 1.70.0 or later. To install Rust:
+
+1. Install rustup, the Rust toolchain installer:
+   - **Windows**: Download and run [rustup-init.exe](https://win.rustup.rs/)
+   - **macOS/Linux**: Run `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`
+
+2. Follow the on-screen instructions to set up Rust stable toolchain
+
+3. Verify your installation with:
+   ```
+   rustc --version
+   cargo --version
+   ```
+
+### Install pre-commit
+
+ZebraSign uses pre-commit hooks to maintain code quality. To install:
+
+1. Install pre-commit:
+   - **Windows**: `pip install pre-commit`
+   - **macOS**: `brew install pre-commit` or `pip install pre-commit`
+   - **Linux**: `pip install pre-commit` or use your distribution's package manager
+
+2. Verify your installation with:
+   ```
+   pre-commit --version
+   ```
+
+### Set up pre-commit hooks
+
+1. Clone the repository and navigate to its root:
+   ```
+   git clone https://github.com/LoadingScreen/zebra.git
+   cd zebra
+   ```
+
+2. Install the pre-commit hooks:
+   ```
+   pre-commit install
+   ```
+
+This will set up hooks that automatically check:
+- Code formatting (rustfmt)
+- Code linting (clippy)
+- File formatting (trailing whitespace, newlines, etc.)
+- YAML and TOML syntax
+
 ## Running the app
 In the root folder, run the following cargo commands to build and run:
 ```
