@@ -108,7 +108,7 @@
         2. Push branch with compliant code; verify CI job passes.
     - **Depends‑on:** [T006]
 
-- [ ] **T010 · Chore · P1: enable branch protection rules for CI checks**
+- [x] **T010 · Chore · P1: enable branch protection rules for CI checks**
     - **Context:** PLAN.md - Phase 3: Integrate into CI Pipeline (Enforcement)
     - **Action:**
         1. Configure GitHub repository settings for the `main` branch.
