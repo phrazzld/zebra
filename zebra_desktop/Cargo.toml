@@ -19,11 +19,14 @@ path = "src/main.rs"
 [dependencies]
 copypasta = "0.10"
 
-# We need to use the master branch because the 0.4.3 release crashes on m1 macs when you edit the menu bar.
-dioxus = { git = "https://github.com/DioxusLabs/dioxus.git", branch = "master" }
-dioxus-desktop = { git = "https://github.com/DioxusLabs/dioxus.git", branch = "master" }
+# We need to use the specific commit because the 0.4.3 release crashes on m1 macs when you edit the menu bar.
+# Using commit 2e65e7a91352e29f966c0f74be0f3e6bde88edc4 instead of branch "master" which no longer exists
+dioxus = { git = "https://github.com/DioxusLabs/dioxus.git", rev = "2e65e7a91352e29f966c0f74be0f3e6bde88edc4" }
+dioxus-desktop = { git = "https://github.com/DioxusLabs/dioxus.git", rev = "2e65e7a91352e29f966c0f74be0f3e6bde88edc4" }
 # dioxus-free-icons = {version = "0.7.0", features = ["octicons"]}
-dioxus-free-icons = { git = "https://github.com/SimonBaars/dioxus-free-icons.git", branch = "main", features = ["octicons"] }
+# Using SimonBaars fork of dioxus-free-icons (forked from benwr) for compatibility with the current Dioxus version
+# Pinned to specific commit 111acbfea05ef66f3c12f3da6d82913c87aa6586 (from June 30, 2024) for security and stability
+dioxus-free-icons = { git = "https://github.com/SimonBaars/dioxus-free-icons.git", rev = "111acbfea05ef66f3c12f3da6d82913c87aa6586", features = ["octicons"] }
 secmem-proc = "0.3"
 
 boringascii.workspace = true

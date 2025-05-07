@@ -1,178 +1,238 @@
 # Todo
 
-## Code Quality Automation - Preparation
-- [x] **T001 · Chore · P2: analyze current formatting violations**
-    - **Context:** PLAN.md - Preparation / Risk Assessment (Implied)
+## Dependency Management
+- [x] **T001 · Bugfix · P0: Verify and secure dioxus-free-icons dependency source**
+    - **Context:** REMEDIATION_PLAN.md - Critical Priority 1: Dependency source change
     - **Action:**
-        1. Run `cargo fmt --all --check` on the current `main` branch.
-        2. Document the number of files needing formatting.
+        1. Contact PR author to confirm intent for switching `dioxus-free-icons` source from `benwr` to `SimonBaars`.
+        2. Audit `SimonBaars/dioxus-free-icons` repository:
+           - Determine if it's a fork of the original repository
+           - Assess repository health (activity, issues, PRs)
+           - Review commit history and code diffs
+           - Check for suspicious code or significant deviations
+        3. Run `cargo audit` to check for known vulnerabilities related to this dependency.
+        4. Pin the dependency to a specific verified commit hash in `zebra_desktop/Cargo.toml` with explanatory comment.
+        5. Run `cargo update -p dioxus-free-icons` to update `Cargo.lock`.
     - **Done‑when:**
-        1. Command executed and results documented.
-    - **Depends‑on:** none
-
-- [x] **T002 · Chore · P2: analyze current linting violations**
-    - **Context:** PLAN.md - Preparation / Risk Assessment (Implied)
-    - **Action:**
-        1. Run `cargo clippy --all-targets --all-features --workspace -- -D warnings` (or final strict command) on the current `main` branch.
-        2. Document the types and counts of lint violations.
-    - **Done‑when:**
-        1. Command executed and results documented.
-    - **Depends‑on:** none
-
-- [x] **T003 · Refactor · P1: fix existing formatting issues**
-    - **Context:** PLAN.md - Preparation / Risk Assessment (Implied)
-    - **Action:**
-        1. Run `cargo fmt --all` across the workspace based on findings from T001.
-        2. Review and commit the formatting changes.
-    - **Done‑when:**
-        1. `cargo fmt --all --check` passes on the `main` branch using the config from T005.
-    - **Depends‑on:** [T001, T005]
-
-- [x] **T004 · Refactor · P1: fix existing linting issues**
-    - **Context:** PLAN.md - Preparation / Risk Assessment (Implied)
-    - **Action:**
-        1. Address lint violations identified in T002 by fixing code.
-        2. Justify and document any required `#[allow(...)]` suppressions per T006.
-        3. Commit the fixes.
-    - **Done‑when:**
-        1. `cargo clippy --all-targets --all-features --workspace -- -D warnings` (or final strict command) passes on the `main` branch.
-    - **Depends‑on:** [T002, T006]
-
-## Code Quality Automation - Configuration
-- [x] **T005 · Chore · P0: configure rustfmt settings**
-    - **Context:** PLAN.md - Phase 1: Configure Formatting and Linting Tools
-    - **Action:**
-        1. Create or update `.rustfmt.toml` in the repository root.
-        2. Set `edition = "2021"` and `max_width = 100`. Add other agreed-upon minimal settings.
-        3. Commit the file.
-    - **Done‑when:**
-        1. `.rustfmt.toml` exists with the specified configuration.
+        1. Intent of source change is understood and documented.
+        2. Repository audit is completed and findings documented.
+        3. Dependency is pinned to specific commit in `Cargo.toml` with justification comment.
+        4. `Cargo.lock` is updated accordingly.
+        5. Project builds successfully and `cargo audit` reports no new critical vulnerabilities.
+        6. UI features using icons function correctly.
     - **Verification:**
-        1. Run `cargo fmt --all --check` passes on code known to be formatted correctly.
+        1. Review `Cargo.toml` for pinned dependency and clear justification.
+        2. Run `cargo build` and `cargo test` successfully.
+        3. Run `cargo audit` and confirm no new critical vulnerabilities.
+        4. Manually test UI components using icons.
     - **Depends‑on:** none
 
-- [x] **T006 · Chore · P0: define and document clippy configuration and allowances**
-    - **Context:** PLAN.md - Phase 1: Configure Formatting and Linting Tools
+## CI/CD
+- [ ] **T002 · Feature · P0: Add cargo test job to CI workflow**
+    - **Context:** REMEDIATION_PLAN.md - Critical Priority 2: Add test job to CI
     - **Action:**
-        1. Define the strict clippy command (e.g., `cargo clippy --all-targets --all-features --workspace -- -D warnings`).
-        2. Evaluate and document any necessary lint allowances based on project needs or T002 findings, providing justification for each.
-        3. Decide if a `clippy.toml` is needed or if flags suffice for pre-commit/CI.
+        1. Edit `.github/workflows/rust_quality.yml` to add a new `test` job.
+        2. Configure job to:
+           - Checkout code
+           - Setup Rust toolchain
+           - Run `cargo test --all-targets --all-features --workspace`
+        3. Ensure this job is added to branch protection rules.
     - **Done‑when:**
-        1. Standard clippy command is defined.
-        2. Required lint allowances are documented with rationale.
+        1. `test` job is configured correctly in `rust_quality.yml`.
+        2. CI executes tests on PRs and commits.
+        3. Test job properly reports pass/fail status.
+        4. Branch protection settings require test job to pass.
     - **Verification:**
-        1. Run the defined clippy command locally to confirm it applies the desired strictness level and allowances.
+        1. Push an update to a branch and confirm the job runs.
+        2. Intentionally create a failing test to verify CI fails.
+        3. Check branch protection settings.
+    - **Depends‑on:** none
+
+- [ ] **T003 · Chore · P2: Add dependency caching to CI workflow**
+    - **Context:** REMEDIATION_PLAN.md - Medium Priority 5: CI caching
+    - **Action:**
+        1. Edit `.github/workflows/rust_quality.yml` to add caching to all jobs.
+        2. Add `actions/cache@v3` steps to `format`, `lint`, and `test` jobs.
+        3. Configure cache paths for:
+           - `~/.cargo/bin/`
+           - `~/.cargo/registry/index/`
+           - `~/.cargo/registry/cache/`
+           - `~/.cargo/git/db/`
+           - `target/`
+        4. Set cache key using `${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}`
+    - **Done‑when:**
+        1. Cache steps are added to all CI jobs.
+        2. Subsequent CI runs show reduced execution time.
+    - **Verification:**
+        1. Observe cache hits in GitHub Actions logs.
+        2. Verify build times decrease in subsequent runs.
     - **Depends‑on:** [T002]
 
-## Code Quality Automation - Tooling Setup
-- [x] **T007 · Feature · P0: implement pre-commit hooks for rustfmt and clippy**
-    - **Context:** PLAN.md - Phase 2: Implement Pre-commit Hooks
+## Documentation
+- [ ] **T004 · Bugfix · P1: Fix Rust variable naming convention in CLAUDE.md**
+    - **Context:** REMEDIATION_PLAN.md - High Priority 3: CLAUDE.md inaccuracies
     - **Action:**
-        1. Create `.pre-commit-config.yaml` in the repository root.
-        2. Add hooks for `rustfmt` and `clippy`, ensuring arguments match T005/T006 configs.
-        3. Include basic file checks (e.g., `check-yaml`, `end-of-file-fixer`, `trailing-whitespace`).
+        1. Edit `CLAUDE.md`.
+        2. Change `- Naming: Follow Rust standard camelCase for variables, PascalCase for types`
+        3. To `- Naming: Follow Rust standard snake_case for variables, function names, and module names; PascalCase for types (structs, enums, traits); SCREAMING_SNAKE_CASE for constants and statics.`
     - **Done‑when:**
-        1. `.pre-commit-config.yaml` exists and is valid.
-        2. `pre-commit run --all-files` executes successfully on compliant code.
+        1. `CLAUDE.md` correctly describes Rust naming conventions.
     - **Verification:**
-        1. Commit non-compliant code (fmt error); verify hook blocks commit.
-        2. Commit non-compliant code (lint error); verify hook blocks commit.
-        3. Commit compliant code; verify commit succeeds.
-    - **Depends‑on:** [T005, T006]
+        1. Review updated document for correctness.
+    - **Depends‑on:** none
 
-- [x] **T008 · Test · P0: create CI job for rustfmt check**
-    - **Context:** PLAN.md - Phase 3: Integrate into CI Pipeline (Format Job)
+- [ ] **T005 · Bugfix · P1: Fix Rust error handling guidance in CLAUDE.md**
+    - **Context:** REMEDIATION_PLAN.md - High Priority 3: CLAUDE.md inaccuracies
     - **Action:**
-        1. Create/update `.github/workflows/rust_quality.yml`.
-        2. Add a job (`format`) that runs `cargo fmt --all --check` using the config from T005.
-        3. Configure triggers (e.g., `on: [push, pull_request]`).
+        1. Edit `CLAUDE.md`.
+        2. Change `- Error handling: Use std::io::Error with appropriate ErrorKind`
+        3. To `- Error handling: Use Result<T, E> for recoverable errors. Define custom error types (e.g., enums or structs implementing std::error::Error), potentially using crates like thiserror for libraries or anyhow for application-level error handling. Propagate errors using the ? operator.`
     - **Done‑when:**
-        1. Workflow file includes the `format` job.
-        2. CI job executes on triggers and passes/fails correctly based on formatting.
+        1. `CLAUDE.md` reflects idiomatic Rust error handling practices.
     - **Verification:**
-        1. Push branch with formatting error; verify CI job fails.
-        2. Push branch with correct formatting; verify CI job passes.
-    - **Depends‑on:** [T005]
+        1. Review updated document for correctness.
+    - **Depends‑on:** none
 
-- [x] **T009 · Test · P0: create CI job for clippy check**
-    - **Context:** PLAN.md - Phase 3: Integrate into CI Pipeline (Lint Job)
+- [ ] **T006 · Bugfix · P1: Fix Rust version in CLAUDE.md**
+    - **Context:** REMEDIATION_PLAN.md - High Priority 3: CLAUDE.md inaccuracies
     - **Action:**
-        1. Update `.github/workflows/rust_quality.yml`.
-        2. Add a job (`lint`) that runs the strict clippy command defined in T006.
-        3. Configure triggers (e.g., `on: [push, pull_request]`).
+        1. Check the MSRV in root `Cargo.toml` and `README.md`.
+        2. Edit `CLAUDE.md` to update the line `- Use Rust Edition 2021 (minimum Rust 1.65)`.
+        3. Replace with correct MSRV, e.g. `- Use Rust Edition 2021 (MSRV: 1.70.0 - ensure consistency with the project's root Cargo.toml).`
     - **Done‑when:**
-        1. Workflow file includes the `lint` job.
-        2. CI job executes on triggers and passes/fails correctly based on lint violations.
+        1. `CLAUDE.md` states correct and consistent Rust version/MSRV.
     - **Verification:**
-        1. Push branch with lint violation; verify CI job fails.
-        2. Push branch with compliant code; verify CI job passes.
-    - **Depends‑on:** [T006]
+        1. Confirm alignment with README.md and root Cargo.toml.
+    - **Depends‑on:** none
 
-- [x] **T010 · Chore · P1: enable branch protection rules for CI checks**
-    - **Context:** PLAN.md - Phase 3: Integrate into CI Pipeline (Enforcement)
+- [ ] **T007 · Chore · P3: Add rationale to branch protection documentation**
+    - **Context:** REMEDIATION_PLAN.md - Low Priority 8: BRANCH_PROTECTION.md
     - **Action:**
-        1. Configure GitHub repository settings for the `main` branch.
-        2. Require the `format` and `lint` status checks (from T008, T009) to pass before merging.
+        1. Edit `.github/docs/BRANCH_PROTECTION.md`.
+        2. Add a paragraph connecting the branch protection rules to the project's code quality philosophy.
     - **Done‑when:**
-        1. Branch protection rules require `format` and `lint` checks to pass for `main`.
+        1. Rationale is added to `BRANCH_PROTECTION.md`.
     - **Verification:**
-        1. Create a PR failing a required check; verify merge is blocked.
-        2. Create a PR passing all required checks; verify merge is allowed.
-    - **Depends‑on:** [T008, T009]
+        1. Review updated document for clarity and context.
+    - **Depends‑on:** none
 
-## Code Quality Automation - Documentation & Testing
-- [x] **T011 · Chore · P1: update README.md with setup instructions**
-    - **Context:** PLAN.md - Phase 4: Update Documentation
+- [ ] **T008 · Chore · P3: Add doc tests to CONTRIBUTING.md**
+    - **Context:** REMEDIATION_PLAN.md - Low Priority 9: CONTRIBUTING.md
     - **Action:**
-        1. Add/Update a "Development Prerequisites" section in `README.md`.
-        2. Include instructions for installing Rust, `pre-commit`, and running `pre-commit install`.
+        1. Edit `CONTRIBUTING.md`.
+        2. Add "Doc tests (`/// # Examples` in Rust code, run via `cargo test`)" to the test types section.
     - **Done‑when:**
-        1. `README.md` contains clear, accurate setup instructions.
+        1. Doc tests are mentioned in `CONTRIBUTING.md`.
     - **Verification:**
-        1. Follow instructions on a clean clone; verify tools install and hooks activate correctly.
-    - **Depends‑on:** [T007]
+        1. Review updated document.
+    - **Depends‑on:** none
 
-- [x] **T012 · Chore · P1: update CONTRIBUTING.md with code quality standards**
-    - **Context:** PLAN.md - Phase 4: Update Documentation
+- [ ] **T009 · Chore · P3: Add conventional commits note to CONTRIBUTING.md**
+    - **Context:** REMEDIATION_PLAN.md - Low Priority 9: CONTRIBUTING.md
     - **Action:**
-        1. Create or update `CONTRIBUTING.md`.
-        2. Document the mandatory `rustfmt` and `clippy` standards, the strictness level, enforcement mechanisms (hooks, CI), and how to fix common issues.
-        3. Explain the policy on lint suppressions (`#[allow(...)]`) based on T006.
+        1. Edit `CONTRIBUTING.md`.
+        2. Add note about adhering to Conventional Commits and potential future tooling enforcement.
     - **Done‑when:**
-        1. `CONTRIBUTING.md` clearly details the code quality standards and procedures.
-    - **Depends‑on:** [T005, T006, T007, T008, T009]
-
-- [x] **T013 · Test · P1: test pre-commit hook functionality**
-    - **Context:** PLAN.md - Testing Strategy
-    - **Action:**
-        1. Attempt commits with deliberate formatting errors; verify rejection.
-        2. Attempt commits with deliberate lint violations; verify rejection.
-        3. Attempt commits with compliant code; verify success.
-    - **Done‑when:**
-        1. Pre-commit hooks reliably block non-compliant code and allow compliant code.
+        1. Conventional Commits information is added to `CONTRIBUTING.md`.
     - **Verification:**
-        1. Manual testing covering different violation scenarios.
-    - **Depends‑on:** [T003, T004, T007]
+        1. Review updated document.
+    - **Depends‑on:** none
 
-- [x] **T014 · Test · P1: test CI pipeline functionality**
-    - **Context:** PLAN.md - Testing Strategy
+- [ ] **T010 · Chore · P3: Mention CI enforcement in README.md**
+    - **Context:** REMEDIATION_PLAN.md - Low Priority 10: README.md
     - **Action:**
-        1. Create a PR with formatting errors; verify `format` CI job fails.
-        2. Create a PR with lint violations; verify `lint` CI job fails.
-        3. Create a PR with compliant code; verify both CI jobs pass.
+        1. Edit `README.md`.
+        2. In prerequisites section, add note that checks are enforced by CI.
     - **Done‑when:**
-        1. CI pipeline correctly identifies and reports formatting/linting issues.
+        1. CI enforcement clarification is added to `README.md`.
     - **Verification:**
-        1. Check GitHub Actions logs and PR status checks for expected outcomes.
-    - **Depends‑on:** [T003, T004, T008, T009]
+        1. Review updated document.
+    - **Depends‑on:** none
 
-- [x] **T015 · Test · P2: verify configuration consistency between pre-commit and CI**
-    - **Context:** PLAN.md - Testing Strategy
+## Web Application Refactoring
+- [ ] **T011 · Feature · P1: Implement line parsing in Rust/Wasm**
+    - **Context:** REMEDIATION_PLAN.md - High Priority 4: Move parsing to zebra_wasm
     - **Action:**
-        1. Compare `rustfmt` settings used locally (T005) and in CI (T008).
-        2. Compare `clippy` command/flags used locally (T007) and in CI (T009).
-        3. Run checks on identical code locally and in CI to ensure identical results.
+        1. Edit `zebra_wasm/src/lib.rs` (or create a new module).
+        2. Define data structure (e.g., `ParsedLineInfo`) with Serialize and wasm_bindgen attributes.
+        3. Implement parsing function with proper error handling.
+        4. Export function to JavaScript via wasm_bindgen.
+        5. Add unit tests for the Rust parsing function.
     - **Done‑when:**
-        1. Configurations are confirmed to be identical or differences are justified and understood.
-        2. Local and CI checks produce the same pass/fail results for the same code.
-    - **Depends‑on:** [T007, T008, T009]
+        1. Rust parsing function is implemented with proper error handling.
+        2. Function is exported via wasm_bindgen.
+        3. Unit tests exist and pass.
+        4. `wasm-pack build` succeeds.
+    - **Verification:**
+        1. Run Rust unit tests with various inputs.
+        2. Build Wasm package successfully.
+    - **Depends‑on:** none
+
+- [ ] **T012 · Refactor · P1: Update webapp to use Wasm parser**
+    - **Context:** REMEDIATION_PLAN.md - High Priority 4: Move parsing to zebra_wasm
+    - **Action:**
+        1. Edit `zebra_webapp/index.html` (or relevant JavaScript file).
+        2. Remove existing `parseString` JavaScript function.
+        3. Update code to call the new Wasm function.
+        4. Add proper error handling for the Result returned by Wasm.
+    - **Done‑when:**
+        1. JavaScript code calls Wasm function instead of original parsing function.
+        2. Error handling is implemented.
+        3. Web app still functions correctly with the refactored code.
+    - **Verification:**
+        1. Build and run web application.
+        2. Test with various inputs (valid and invalid) to ensure proper behavior.
+    - **Depends‑on:** [T011]
+
+## Development Environment
+- [ ] **T013 · Chore · P2: Update pre-commit hooks for Rust**
+    - **Context:** REMEDIATION_PLAN.md - Medium Priority 6: Pre-commit hooks
+    - **Action:**
+        1. Edit `.pre-commit-config.yaml`.
+        2. Remove old `doublify/pre-commit-rust` hook.
+        3. Add modern hooks for rustfmt and clippy, using either:
+           - Local hooks with `language: system`
+           - Or a maintained mirror repo
+        4. Run `pre-commit install --install-hooks`.
+    - **Done‑when:**
+        1. Old hook is removed.
+        2. New hooks are added and properly configured.
+        3. Hooks run successfully on commit.
+    - **Verification:**
+        1. Make a formatting error and verify commit is blocked.
+        2. Make a linting error and verify commit is blocked.
+        3. Fix errors and verify commit succeeds.
+    - **Depends‑on:** none
+
+- [ ] **T014 · Chore · P2: Remove redundant Cargo.lock entry from .gitignore**
+    - **Context:** REMEDIATION_PLAN.md - Medium Priority 7: .gitignore redundancy
+    - **Action:**
+        1. Edit `.gitignore`.
+        2. Remove the line `!Cargo.lock`.
+    - **Done‑when:**
+        1. Redundant line is removed.
+        2. `Cargo.lock` is still tracked by git.
+    - **Verification:**
+        1. Run `git status` to confirm `Cargo.lock` is still tracked.
+    - **Depends‑on:** none
+
+## Future Work
+- [ ] **T015 · Research · P3: Research conventional commits enforcement tooling**
+    - **Context:** REMEDIATION_PLAN.md - Low Priority 11: Conventional Commits
+    - **Action:**
+        1. Research tools for enforcing Conventional Commits format.
+        2. Document options (e.g., commitlint, husky, pre-commit hooks).
+        3. Create proposal for future implementation.
+    - **Done‑when:**
+        1. Research findings and recommendations are documented.
+    - **Verification:**
+        1. Review research document.
+    - **Depends‑on:** none
+
+### Clarifications & Assumptions
+- [ ] **Issue:** Confirm the exact MSRV (Minimum Supported Rust Version) for the project.
+    - **Context:** Needed for T006
+    - **Blocking?:** no
+- [ ] **Issue:** Should we consider forking `dioxus-free-icons` under the project's organization if the SimonBaars fork is only needed temporarily?
+    - **Context:** Alternative approach for T001
+    - **Blocking?:** no
