@@ -12,6 +12,7 @@ The following status checks must pass before merging to the `main` branch:
 
 1. **format** - Ensures code follows the formatting standards defined in `.rustfmt.toml`
 2. **lint** - Ensures code passes the linting checks defined by our clippy configuration
+3. **test** - Ensures all tests pass across the workspace, including unit and integration tests
 
 ## Configuration Steps
 
@@ -24,9 +25,10 @@ To set up branch protection rules, a repository administrator should follow thes
 5. In the "Branch name pattern" field, enter `main`
 6. Check "Require status checks to pass before merging"
 7. Check "Require branches to be up to date before merging"
-8. In the search box, search for and select both:
+8. In the search box, search for and select the following:
    - The `format` check (from the "Rust Code Quality" workflow)
    - The `lint` check (from the "Rust Code Quality" workflow)
+   - The `test` check (from the "Rust Code Quality" workflow)
 9. Optional but recommended settings:
    - Check "Require pull request reviews before merging"
    - Check "Require approval of the most recent reviewable push"

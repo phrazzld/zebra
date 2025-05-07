@@ -28,7 +28,7 @@
     - **Depends‑on:** none
 
 ## CI/CD
-- [ ] **T002 · Feature · P0: Add cargo test job to CI workflow**
+- [x] **T002 · Feature · P0: Add cargo test job to CI workflow**
     - **Context:** REMEDIATION_PLAN.md - Critical Priority 2: Add test job to CI
     - **Action:**
         1. Edit `.github/workflows/rust_quality.yml` to add a new `test` job.
