@@ -16,7 +16,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Follow default Rust formatting and idioms
 - Security: Use `zeroize` and `ZeroizeOnDrop` for sensitive data
 - Error handling: Use `std::io::Error` with appropriate `ErrorKind`
-- Naming: Follow Rust standard camelCase for variables, PascalCase for types
+- Naming: Follow Rust standard snake_case for variables, function names, and module names; PascalCase for types (structs, enums, traits); SCREAMING_SNAKE_CASE for constants and statics
 - Imports: Organize imports by standard library, then external crates, then local modules
 - Documentation: Thoroughly document public interfaces with /// comments
 - Memory safety: Minimize time private keys are in memory

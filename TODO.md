@@ -69,7 +69,7 @@
     - **Depends‑on:** [T002]
 
 ## Documentation
-- [ ] **T004 · Bugfix · P1: Fix Rust variable naming convention in CLAUDE.md**
+- [x] **T004 · Bugfix · P1: Fix Rust variable naming convention in CLAUDE.md**
     - **Context:** REMEDIATION_PLAN.md - High Priority 3: CLAUDE.md inaccuracies
     - **Action:**
         1. Edit `CLAUDE.md`.
