@@ -81,7 +81,7 @@
         1. Review updated document for correctness.
     - **Depends‑on:** none
 
-- [ ] **T005 · Bugfix · P1: Fix Rust error handling guidance in CLAUDE.md**
+- [x] **T005 · Bugfix · P1: Fix Rust error handling guidance in CLAUDE.md**
     - **Context:** REMEDIATION_PLAN.md - High Priority 3: CLAUDE.md inaccuracies
     - **Action:**
         1. Edit `CLAUDE.md`.

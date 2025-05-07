@@ -15,7 +15,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Use Rust Edition 2021 (minimum Rust 1.65)
 - Follow default Rust formatting and idioms
 - Security: Use `zeroize` and `ZeroizeOnDrop` for sensitive data
-- Error handling: Use `std::io::Error` with appropriate `ErrorKind`
+- Error handling: Use `Result<T, E>` for recoverable errors. Define custom error types (e.g., enums or structs implementing `std::error::Error`), potentially using crates like `thiserror` for libraries or `anyhow` for application-level error handling. Propagate errors using the `?` operator
 - Naming: Follow Rust standard snake_case for variables, function names, and module names; PascalCase for types (structs, enums, traits); SCREAMING_SNAKE_CASE for constants and statics
 - Imports: Organize imports by standard library, then external crates, then local modules
 - Documentation: Thoroughly document public interfaces with /// comments
