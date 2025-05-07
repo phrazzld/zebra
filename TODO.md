@@ -93,7 +93,7 @@
         1. Review updated document for correctness.
     - **Depends‑on:** none
 
-- [ ] **T006 · Bugfix · P1: Fix Rust version in CLAUDE.md**
+- [x] **T006 · Bugfix · P1: Fix Rust version in CLAUDE.md**
     - **Context:** REMEDIATION_PLAN.md - High Priority 3: CLAUDE.md inaccuracies
     - **Action:**
         1. Check the MSRV in root `Cargo.toml` and `README.md`.
@@ -230,9 +230,10 @@
     - **Depends‑on:** none
 
 ### Clarifications & Assumptions
-- [ ] **Issue:** Confirm the exact MSRV (Minimum Supported Rust Version) for the project.
+- [x] **Issue:** Confirm the exact MSRV (Minimum Supported Rust Version) for the project.
     - **Context:** Needed for T006
     - **Blocking?:** no
+    - **Resolution:** There's a discrepancy between Cargo.toml (1.65) and README.md (1.70.0). Opted to use README.md's value (1.70.0) as it's more recently updated and user-facing.
 - [ ] **Issue:** Should we consider forking `dioxus-free-icons` under the project's organization if the SimonBaars fork is only needed temporarily?
     - **Context:** Alternative approach for T001
     - **Blocking?:** no

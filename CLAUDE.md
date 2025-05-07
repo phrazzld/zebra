@@ -12,7 +12,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Build & run webapp: `cd zebra_webapp && npm install && npm run build && npm run start`
 
 ## Code Style Guidelines
-- Use Rust Edition 2021 (minimum Rust 1.65)
+- Use Rust Edition 2021 (MSRV: 1.70.0 - ensure consistency with the project's README.md)
 - Follow default Rust formatting and idioms
 - Security: Use `zeroize` and `ZeroizeOnDrop` for sensitive data
 - Error handling: Use `Result<T, E>` for recoverable errors. Define custom error types (e.g., enums or structs implementing `std::error::Error`), potentially using crates like `thiserror` for libraries or `anyhow` for application-level error handling. Propagate errors using the `?` operator
