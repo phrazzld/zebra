@@ -75,6 +75,7 @@ Currently, there is only one allowed suppression in the codebase:
   - **Unit Tests:** Functions and modules in isolation
   - **Integration Tests:** Components working together
   - **Property Tests:** For validating cryptographic code properties
+  - **Doc Tests:** Examples in documentation that double as tests (`/// # Examples` in Rust code, run via `cargo test`)
 - **Naming Conventions:**
   - Test modules should use the `#[cfg(test)]` attribute
   - Test functions should be descriptive and follow `snake_case` naming
@@ -83,6 +84,7 @@ Currently, there is only one allowed suppression in the codebase:
   - Test both happy paths and edge cases
   - Mock only external dependencies, never internal collaborators
   - Cryptographic code should include verification against known test vectors
+  - Include runnable examples in documentation for public APIs
 
 ## Enforcement Mechanisms
 

@@ -116,7 +116,7 @@
         1. Review updated document for clarity and context.
     - **Depends‑on:** none
 
-- [ ] **T008 · Chore · P3: Add doc tests to CONTRIBUTING.md**
+- [x] **T008 · Chore · P3: Add doc tests to CONTRIBUTING.md**
     - **Context:** REMEDIATION_PLAN.md - Low Priority 9: CONTRIBUTING.md
     - **Action:**
         1. Edit `CONTRIBUTING.md`.
