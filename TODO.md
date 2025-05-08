@@ -217,7 +217,7 @@
     - **Depends‑on:** none
 
 ## Future Work
-- [ ] **T015 · Research · P3: Research conventional commits enforcement tooling**
+- [x] **T015 · Research · P3: Research conventional commits enforcement tooling**
     - **Context:** REMEDIATION_PLAN.md - Low Priority 11: Conventional Commits
     - **Action:**
         1. Research tools for enforcing Conventional Commits format.
