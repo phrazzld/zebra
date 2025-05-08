@@ -6,6 +6,8 @@ This document describes the branch protection rules that should be configured fo
 
 Branch protection rules ensure that pull requests meet certain criteria before they can be merged into the protected branch (in this case, `main`). For ZebraSign, we require that CI checks for formatting and linting pass before merging.
 
+These branch protection rules directly support our core development philosophy of "Automate Everything" and enforce mandatory quality gates described in our DEVELOPMENT_PHILOSOPHY.md. By preventing code that fails tests, formatting, or linting from being merged, we maintain consistency, reduce bugs, and ensure that all code in the main branch meets our quality standards. This automated enforcement is critical for ZebraSign, where reliability and security are paramount given the cryptographic nature of the application.
+
 ## Required Status Checks
 
 The following status checks must pass before merging to the `main` branch:

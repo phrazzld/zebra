@@ -48,7 +48,7 @@
         3. Check branch protection settings.
     - **Depends‑on:** none
 
-- [ ] **T003 · Chore · P2: Add dependency caching to CI workflow**
+- [x] **T003 · Chore · P2: Add dependency caching to CI workflow**
     - **Context:** REMEDIATION_PLAN.md - Medium Priority 5: CI caching
     - **Action:**
         1. Edit `.github/workflows/rust_quality.yml` to add caching to all jobs.
@@ -105,7 +105,7 @@
         1. Confirm alignment with README.md and root Cargo.toml.
     - **Depends‑on:** none
 
-- [ ] **T007 · Chore · P3: Add rationale to branch protection documentation**
+- [x] **T007 · Chore · P3: Add rationale to branch protection documentation**
     - **Context:** REMEDIATION_PLAN.md - Low Priority 8: BRANCH_PROTECTION.md
     - **Action:**
         1. Edit `.github/docs/BRANCH_PROTECTION.md`.
