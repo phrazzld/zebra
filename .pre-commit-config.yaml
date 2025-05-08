@@ -18,18 +18,17 @@ repos:
       - id: check-merge-conflict
         description: "Check for files with merge conflict strings"
 
-  # Rust formatting using rustfmt
-  - repo: https://github.com/doublify/pre-commit-rust
-    rev: v1.0
-    hooks:
-      - id: fmt
-        name: "rustfmt: Format Rust code"
-        description: "Run rustfmt on Rust code"
-        args: ["--all", "--"]
-
-  # Rust linting using Clippy
+  # Rust hooks using local system commands
   - repo: local
     hooks:
+      - id: rustfmt
+        name: "rustfmt: Format Rust code"
+        description: "Run rustfmt on Rust code"
+        entry: cargo fmt --all -- --check
+        language: system
+        files: \.rs$
+        pass_filenames: false
+
       - id: clippy
         name: "clippy: Lint Rust code"
         description: "Run clippy on Rust code (with standard configuration)"

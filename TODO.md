@@ -185,7 +185,7 @@
     - **Depends‑on:** [T011]
 
 ## Development Environment
-- [ ] **T013 · Chore · P2: Update pre-commit hooks for Rust**
+- [x] **T013 · Chore · P2: Update pre-commit hooks for Rust**
     - **Context:** REMEDIATION_PLAN.md - Medium Priority 6: Pre-commit hooks
     - **Action:**
         1. Edit `.pre-commit-config.yaml`.
