@@ -204,7 +204,7 @@
         3. Fix errors and verify commit succeeds.
     - **Depends‑on:** none
 
-- [ ] **T014 · Chore · P2: Remove redundant Cargo.lock entry from .gitignore**
+- [x] **T014 · Chore · P2: Remove redundant Cargo.lock entry from .gitignore**
     - **Context:** REMEDIATION_PLAN.md - Medium Priority 7: .gitignore redundancy
     - **Action:**
         1. Edit `.gitignore`.

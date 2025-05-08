@@ -4,8 +4,7 @@
 *.pdb
 
 # Cargo
-Cargo.lock
-!Cargo.lock
+# We track Cargo.lock for reproducible builds
 
 # IDEs and editors
 .idea/
