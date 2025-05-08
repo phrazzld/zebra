@@ -1,0 +1,18 @@
+[package]
+name = "dioxus_free_icons"
+version = "0.7.0"
+edition = "2021"
+description = "Vendored version of dioxus-free-icons with fixed dependencies"
+
+[lib]
+name = "dioxus_free_icons"
+path = "lib.rs"
+
+[dependencies]
+dioxus = { git = "https://github.com/DioxusLabs/dioxus.git", rev = "2e65e7a91352e29f966c0f74be0f3e6bde88edc4" }
+dioxus-core = { git = "https://github.com/DioxusLabs/dioxus.git", rev = "2e65e7a91352e29f966c0f74be0f3e6bde88edc4" }
+dioxus-html = { git = "https://github.com/DioxusLabs/dioxus.git", rev = "2e65e7a91352e29f966c0f74be0f3e6bde88edc4" }
+
+[features]
+default = []
+octicons = []

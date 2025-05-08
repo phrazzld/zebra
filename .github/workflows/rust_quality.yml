@@ -24,6 +24,19 @@ jobs:
           override: true
           components: rustfmt
 
+      - name: Cache Cargo Dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ runner.os }}-cargo-format-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-format-
+
       - name: Check Formatting
         run: cargo fmt --all --check
         # This uses the .rustfmt.toml configuration from the repository root
@@ -42,6 +55,19 @@ jobs:
           override: true
           components: clippy
 
+      - name: Cache Cargo Dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ runner.os }}-cargo-lint-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-lint-
+
       - name: Run Clippy
         run: cargo clippy --all-targets --all-features --workspace -- -D warnings
         # This uses the clippy.toml configuration from the repository root
@@ -58,6 +84,19 @@ jobs:
           profile: minimal
           toolchain: stable
           override: true
+
+      - name: Cache Cargo Dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ runner.os }}-cargo-test-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-test-
 
       - name: Run Tests
         run: cargo test --all-targets --all-features --workspace

@@ -23,10 +23,11 @@ copypasta = "0.10"
 # Using commit 2e65e7a91352e29f966c0f74be0f3e6bde88edc4 instead of branch "master" which no longer exists
 dioxus = { git = "https://github.com/DioxusLabs/dioxus.git", rev = "2e65e7a91352e29f966c0f74be0f3e6bde88edc4" }
 dioxus-desktop = { git = "https://github.com/DioxusLabs/dioxus.git", rev = "2e65e7a91352e29f966c0f74be0f3e6bde88edc4" }
-# dioxus-free-icons = {version = "0.7.0", features = ["octicons"]}
-# Using SimonBaars fork of dioxus-free-icons (forked from benwr) for compatibility with the current Dioxus version
-# Pinned to specific commit 111acbfea05ef66f3c12f3da6d82913c87aa6586 (from June 30, 2024) for security and stability
-dioxus-free-icons = { git = "https://github.com/SimonBaars/dioxus-free-icons.git", rev = "111acbfea05ef66f3c12f3da6d82913c87aa6586", features = ["octicons"] }
+dioxus-core = { git = "https://github.com/DioxusLabs/dioxus.git", rev = "2e65e7a91352e29f966c0f74be0f3e6bde88edc4" }
+dioxus-hooks = { git = "https://github.com/DioxusLabs/dioxus.git", rev = "2e65e7a91352e29f966c0f74be0f3e6bde88edc4" }
+dioxus-html = { git = "https://github.com/DioxusLabs/dioxus.git", rev = "2e65e7a91352e29f966c0f74be0f3e6bde88edc4" }
+# Using a vendored version of dioxus-free-icons to resolve dependency conflicts
+dioxus_free_icons = { path = "../vendor", features = ["octicons"] }
 secmem-proc = "0.3"
 
 boringascii.workspace = true

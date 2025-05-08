@@ -6,12 +6,13 @@ use std::str::FromStr;
 use copypasta::{ClipboardContext, ClipboardProvider};
 use dioxus::prelude::*;
 use dioxus_desktop::WindowBuilder;
-use dioxus_free_icons::{
-    icons::go_icons::{
-        GoCheck, GoCopy, GoPlusCircle, GoSearch, GoShieldCheck, GoShieldLock, GoTrash,
-        GoUnverified, GoVerified,
-    },
-    Icon,
+use dioxus_free_icons::Icon;
+use dioxus_free_icons::icons::go_icons;
+
+// Import the icons for use in the app
+use dioxus_free_icons::icons::go_icons::{
+    GoCheck, GoCopy, GoPlusCircle, GoSearch, GoShieldCheck, GoShieldLock, GoTrash,
+    GoUnverified, GoVerified,
 };
 
 use boringascii::BoringAscii;
