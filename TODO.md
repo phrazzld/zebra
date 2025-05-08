@@ -138,7 +138,7 @@
         1. Review updated document.
     - **Depends‑on:** none
 
-- [ ] **T010 · Chore · P3: Mention CI enforcement in README.md**
+- [x] **T010 · Chore · P3: Mention CI enforcement in README.md**
     - **Context:** REMEDIATION_PLAN.md - Low Priority 10: README.md
     - **Action:**
         1. Edit `README.md`.

@@ -137,6 +137,8 @@ This will set up hooks that automatically check:
 - File formatting (trailing whitespace, newlines, etc.)
 - YAML and TOML syntax
 
+These same quality checks are also enforced by our CI pipeline. All pull requests must pass these checks before they can be merged to the main branch, ensuring consistent code quality across the project.
+
 ## Running the app
 In the root folder, run the following cargo commands to build and run:
 ```
