@@ -150,7 +150,7 @@
     - **Depends‑on:** none
 
 ## Web Application Refactoring
-- [ ] **T011 · Feature · P1: Implement line parsing in Rust/Wasm**
+- [x] **T011 · Feature · P1: Implement line parsing in Rust/Wasm**
     - **Context:** REMEDIATION_PLAN.md - High Priority 4: Move parsing to zebra_wasm
     - **Action:**
         1. Edit `zebra_wasm/src/lib.rs` (or create a new module).
@@ -229,11 +229,20 @@
         1. Review research document.
     - **Depends‑on:** none
 
-### Clarifications & Assumptions
-- [x] **Issue:** Confirm the exact MSRV (Minimum Supported Rust Version) for the project.
-    - **Context:** Needed for T006
-    - **Blocking?:** no
-    - **Resolution:** There's a discrepancy between Cargo.toml (1.65) and README.md (1.70.0). Opted to use README.md's value (1.70.0) as it's more recently updated and user-facing.
-- [ ] **Issue:** Should we consider forking `dioxus-free-icons` under the project's organization if the SimonBaars fork is only needed temporarily?
-    - **Context:** Alternative approach for T001
-    - **Blocking?:** no
+- [ ] **T016 · Bugfix · P1: Fix dioxus dependency conflicts in desktop app**
+    - **Context:** DIOXUS_DEPENDENCY_ISSUE.md
+    - **Action:**
+        1. Analyze the dependency conflict in zebra_desktop.
+        2. Update the dioxus dependencies to compatible versions.
+        3. Ensure dioxus-free-icons pinning is maintained.
+        4. Review and test the desktop application.
+    - **Done‑when:**
+        1. Dependency conflicts are resolved.
+        2. Clippy runs without errors across the workspace.
+        3. Desktop application builds and functions correctly.
+    - **Verification:**
+        1. Run `cargo clippy --all-targets --all-features --workspace`.
+        2. Run `cargo run -p zebra_desktop`.
+        3. Test desktop app functionality.
+    - **Depends‑on:** [T001]
+
