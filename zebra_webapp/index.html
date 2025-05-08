@@ -105,21 +105,9 @@
       </div>
     </div>
     <script>
+      // Using WebAssembly implementation
       function parseString(input) {
-        let start = input.lastIndexOf(" <");
-        while (start !== -1) {
-            let end = input.indexOf("> ", start) + 2;
-            if (end !== 1) {
-                let middle = input.substring(start + 2, end - 2);
-                if (!/\s/.test(middle)) {
-                    let before = input.slice(0, start + 1);
-                    let after = input.slice(end - 1);
-                    return [before, middle, after];
-                }
-            }
-            start = input.lastIndexOf(" <", start - 1);
-        }
-        return [input, '', ''];
+        return parseLineForIdentifier(input);
       }
 
       function verifySignatureAndShowMessage() {

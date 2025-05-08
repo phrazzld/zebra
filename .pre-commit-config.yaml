@@ -24,7 +24,7 @@ repos:
       - id: rustfmt
         name: "rustfmt: Format Rust code"
         description: "Run rustfmt on Rust code"
-        entry: bash -c 'cargo fmt --package zebra_wasm -- --check'
+        entry: bash -c 'cargo fmt --package zebra_wasm --package zebra_crypto --package zebra_storage -- --check'
         language: system
         files: \.rs$
         pass_filenames: false
@@ -32,7 +32,7 @@ repos:
       - id: clippy
         name: "clippy: Lint Rust code"
         description: "Run clippy on Rust code (with standard configuration)"
-        entry: bash -c 'cargo clippy --all-targets --all-features --package zebra_wasm -- -D warnings'
+        entry: bash -c 'cargo clippy --all-targets --all-features --package zebra_wasm --package zebra_crypto --package zebra_storage -- -D warnings'
         language: system
         files: \.rs$
         pass_filenames: false

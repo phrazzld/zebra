@@ -4,5 +4,6 @@
 import("./index.js")
   .then(module => {
     window.verifySignature = module.verifySignature;
+    window.parseLineForIdentifier = module.parseLineForIdentifier;
   })
   .catch(e => console.error("Error importing `index.js`:", e));

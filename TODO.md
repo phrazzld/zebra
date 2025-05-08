@@ -168,7 +168,7 @@
         2. Build Wasm package successfully.
     - **Depends‑on:** none
 
-- [ ] **T012 · Refactor · P1: Update webapp to use Wasm parser**
+- [x] **T012 · Refactor · P1: Update webapp to use Wasm parser**
     - **Context:** REMEDIATION_PLAN.md - High Priority 4: Move parsing to zebra_wasm
     - **Action:**
         1. Edit `zebra_webapp/index.html` (or relevant JavaScript file).
@@ -246,3 +246,19 @@
         3. Test desktop app functionality.
     - **Depends‑on:** [T001]
 
+- [ ] **T017 · Bugfix · P1: Fix webapp build issues with WebAssembly**
+    - **Context:** TASK_T012_COMPLETION.md
+    - **Action:**
+        1. Analyze the webpack configuration and Node.js compatibility issues.
+        2. Update webpack configuration to properly handle WebAssembly modules.
+        3. Consider upgrading webpack or adding necessary loaders.
+        4. Test the webapp with the updated build process.
+    - **Done‑when:**
+        1. The webapp builds without errors.
+        2. The WebAssembly module is properly loaded and functions correctly.
+        3. All webapp features work as expected.
+    - **Verification:**
+        1. Run `cd zebra_webapp && npm run build`.
+        2. Run `cd zebra_webapp && npm run start`.
+        3. Test the webapp in a browser, verifying line parsing functionality.
+    - **Depends‑on:** [T012]
