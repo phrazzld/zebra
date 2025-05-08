@@ -127,7 +127,7 @@
         1. Review updated document.
     - **Depends‑on:** none
 
-- [ ] **T009 · Chore · P3: Add conventional commits note to CONTRIBUTING.md**
+- [x] **T009 · Chore · P3: Add conventional commits note to CONTRIBUTING.md**
     - **Context:** REMEDIATION_PLAN.md - Low Priority 9: CONTRIBUTING.md
     - **Action:**
         1. Edit `CONTRIBUTING.md`.

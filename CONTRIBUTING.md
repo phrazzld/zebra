@@ -133,6 +133,9 @@ The project uses GitHub Actions to enforce code quality on all PRs and pushes to
 - **Tests:** New features should include tests
 - **Documentation:** Update documentation as needed
 - **Commit Messages:** Follow [Conventional Commits](https://www.conventionalcommits.org/) style
+  - Conventional Commits enable automated versioning and changelog generation
+  - The project may implement tooling in the future to enforce this standard
+  - Contributors are encouraged to use tools like commitlint, git hooks, or IDE plugins to help follow the standard
 
 ## Common Issues and Solutions
 
