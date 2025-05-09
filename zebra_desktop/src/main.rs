@@ -7,7 +7,6 @@ use copypasta::{ClipboardContext, ClipboardProvider};
 use dioxus::prelude::*;
 use dioxus_desktop::WindowBuilder;
 use dioxus_free_icons::Icon;
-use dioxus_free_icons::icons::go_icons;
 
 // Import the icons for use in the app
 use dioxus_free_icons::icons::go_icons::{
@@ -337,7 +336,7 @@ fn DeleteButton(props: DeleteButtonProps) -> Element {
                 width: 15,
                 height: 15,
                 fill: "#cc3333",
-                icon: GoTrash,
+                icon: GoTrash(),
             }
         }
     }
@@ -372,7 +371,7 @@ fn VerifyButton(props: VerifyButtonProps) -> Element {
                     width: 15,
                     height: 15,
                     fill: "#00f",
-                    icon: GoVerified,
+                    icon: GoVerified(),
                 }
             }
         }
@@ -397,7 +396,7 @@ fn VerifyButton(props: VerifyButtonProps) -> Element {
                     width: 15,
                     height: 15,
                     fill: "#999",
-                    icon: GoUnverified,
+                    icon: GoUnverified(),
                 }
             }
         }
@@ -422,7 +421,7 @@ fn FilterRow<T: Filter + 'static>() -> Element {
                     width: 16,
                     height: 16,
                     fill: "black",
-                    icon: GoSearch,
+                    icon: GoSearch(),
                 }
             }
             td {
@@ -437,7 +436,7 @@ fn FilterRow<T: Filter + 'static>() -> Element {
                     width: 16,
                     height: 16,
                     fill: "black",
-                    icon: GoSearch,
+                    icon: GoSearch(),
                 }
             }
             td {
@@ -452,7 +451,7 @@ fn FilterRow<T: Filter + 'static>() -> Element {
                     width: 16,
                     height: 16,
                     fill: "black",
-                    icon: GoSearch,
+                    icon: GoSearch(),
                 }
             }
             td {
@@ -600,7 +599,7 @@ fn MyKeys() -> Element {
                 width: 15,
                 height: 15,
                 fill: "black",
-                icon: GoPlusCircle,
+                icon: GoPlusCircle(),
             }
             input {
                 class: "new_key_name_input",
@@ -690,14 +689,14 @@ fn MyKeys() -> Element {
                                                 width: 15,
                                                 height: 15,
                                                 fill: "black",
-                                                icon: GoCopy,
+                                                icon: GoCopy(),
                                             }
                                             if copied_to_clipboard.read().0 == Some(k.clone()) {
                                                 Icon {
                                                     width: 15,
                                                     height: 15,
                                                     fill: "green",
-                                                    icon: GoCheck,
+                                                    icon: GoCheck(),
                                                 }
                                             }
                                         }
@@ -739,7 +738,7 @@ fn OtherKeys() -> Element {
                 width: 15,
                 height: 15,
                 fill: "black",
-                icon: GoPlusCircle,
+                icon: GoPlusCircle(),
             }
             button {
                 onclick: move |_| {
@@ -850,14 +849,14 @@ fn OtherKeys() -> Element {
                                                 width: 15,
                                                 height: 15,
                                                 fill: "black",
-                                                icon: GoCopy,
+                                                icon: GoCopy(),
                                             }
                                             if copied_to_clipboard.read().0 == Some(k.0.clone()) {
                                                 Icon {
                                                     width: 15,
                                                     height: 15,
                                                     fill: "green",
-                                                    icon: GoCheck,
+                                                    icon: GoCheck(),
                                                 }
                                             }
                                         },
@@ -982,7 +981,7 @@ fn Sign() -> Element {
                 width: 15,
                 height: 15,
                 fill: "black",
-                icon: GoShieldLock,
+                icon: GoShieldLock(),
             }
             SignAndCopy {}
         },
@@ -1063,7 +1062,7 @@ fn Sign() -> Element {
                                                 width: 15,
                                                 height: 15,
                                                 fill: "#00f",
-                                                icon: GoVerified,
+                                                icon: GoVerified(),
                                             }
                                         }
                                     }
@@ -1119,7 +1118,7 @@ fn SignAndCopy() -> Element {
                 width: 15,
                 height: 15,
                 fill: "green",
-                icon: GoCheck,
+                icon: GoCheck(),
             }
         }
     }
@@ -1237,7 +1236,7 @@ fn VerificationResults(props: VerificationResultsProps) -> Element {
                                                 width: 15,
                                                 height: 15,
                                                 fill: "#00f",
-                                                icon: GoVerified,
+                                                icon: GoVerified(),
                                             }
                                         }
                                 } else if my_keys.contains(pubkey) || known_keys.contains_key(pubkey) {
@@ -1247,7 +1246,7 @@ fn VerificationResults(props: VerificationResultsProps) -> Element {
                                                 width: 15,
                                                 height: 15,
                                                 fill: "#d80",
-                                                icon: GoVerified,
+                                                icon: GoVerified(),
                                             }
                                         }
                                 }
@@ -1283,7 +1282,7 @@ fn Verify() -> Element {
                     width: 15,
                     height: 15,
                     fill: "black",
-                    icon: GoShieldCheck,
+                    icon: GoShieldCheck(),
                 }
                 PasteAndVerify {}
             },
@@ -1305,7 +1304,7 @@ fn Verify() -> Element {
                     width: 15,
                     height: 15,
                     fill: "black",
-                    icon: GoShieldCheck,
+                    icon: GoShieldCheck(),
                 }
                 PasteAndVerify {}
             },
@@ -1323,7 +1322,7 @@ fn Verify() -> Element {
                     width: 15,
                     height: 15,
                     fill: "black",
-                    icon: GoShieldCheck,
+                    icon: GoShieldCheck(),
                 }
                 PasteAndVerify {}
             },

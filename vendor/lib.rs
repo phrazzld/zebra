@@ -1,90 +1,97 @@
+// Minimal implementation of dioxus-free-icons that works with the existing code
+#![allow(non_snake_case)]
 use dioxus::prelude::*;
 
+// Icons module that matches the dioxus-free-icons API
 pub mod icons {
     pub mod go_icons {
         use dioxus::prelude::*;
 
-        // Define a simplified version of the icons we need
-        #[component]
+        // Simple icon functions that return Element directly
         pub fn GoCheck() -> Element {
-            rsx! { div { "✓" } }
+            rsx! { span { style: "color: inherit", "✓" } }
         }
 
-        #[component]
         pub fn GoCopy() -> Element {
-            rsx! { div { "⎘" } }
+            rsx! { span { style: "color: inherit", "⎘" } }
         }
 
-        #[component]
         pub fn GoPlusCircle() -> Element {
-            rsx! { div { "⊕" } }
+            rsx! { span { style: "color: inherit", "⊕" } }
         }
 
-        #[component]
         pub fn GoSearch() -> Element {
-            rsx! { div { "🔍" } }
+            rsx! { span { style: "color: inherit", "🔍" } }
         }
 
-        #[component]
         pub fn GoShieldCheck() -> Element {
-            rsx! { div { "🛡️✓" } }
+            rsx! { span { style: "color: inherit", "🛡️✓" } }
         }
 
-        #[component]
         pub fn GoShieldLock() -> Element {
-            rsx! { div { "🛡️🔒" } }
+            rsx! { span { style: "color: inherit", "🛡️🔒" } }
         }
 
-        #[component]
         pub fn GoTrash() -> Element {
-            rsx! { div { "🗑️" } }
+            rsx! { span { style: "color: inherit", "🗑️" } }
         }
 
-        #[component]
         pub fn GoUnverified() -> Element {
-            rsx! { div { "❌" } }
+            rsx! { span { style: "color: inherit", "❌" } }
         }
 
-        #[component]
         pub fn GoVerified() -> Element {
-            rsx! { div { "✅" } }
+            rsx! { span { style: "color: inherit", "✅" } }
         }
     }
 }
 
-// Simplified Icon component
-#[component]
-pub fn Icon(
-    class: Option<String>,
-    onclick: Option<EventHandler<MouseEvent>>,
-    width: Option<u32>,
-    height: Option<u32>,
-    fill: Option<String>,
-    icon: Option<Element>,
-    children: Element,
-) -> Element {
-    rsx! {
-        div {
-            class: class.clone().unwrap_or_default(),
-            onclick: move |e| {
-                if let Some(onclick) = &onclick {
-                    onclick.call(e);
-                }
-            },
-            style: {
-                let mut style = String::new();
-                if let Some(fill) = &fill {
-                    style.push_str(&format!("color: {};", fill));
-                }
-                if let Some(width) = width {
-                    style.push_str(&format!("width: {}px;", width));
-                }
-                if let Some(height) = height {
-                    style.push_str(&format!("height: {}px;", height));
-                }
-                style
-            },
-            {icon.unwrap_or(children)}
+// Icon component that matches the dioxus-free-icons API
+#[derive(Props, Clone, PartialEq)]
+pub struct Icon {
+    pub width: Option<u32>,
+    pub height: Option<u32>,
+    pub fill: Option<String>,
+    pub class: Option<String>,
+    pub onclick: Option<EventHandler<MouseEvent>>,
+    pub icon: Element,
+}
+
+// Function version of the Icon component
+pub fn Icon(props: Icon) -> Element {
+    let mut style = String::new();
+
+    // Add color if present
+    if let Some(fill) = props.fill {
+        style.push_str(&format!("color: {};", fill));
+    }
+
+    // Add dimensions if present
+    if let Some(width) = props.width {
+        style.push_str(&format!("width: {}px;", width));
+    }
+
+    if let Some(height) = props.height {
+        style.push_str(&format!("height: {}px;", height));
+    }
+
+    // Handle both cases - with and without onclick handler
+    if let Some(onclick) = props.onclick {
+        rsx! {
+            div {
+                class: props.class,
+                onclick: move |e| onclick.call(e),
+                style: style,
+                {props.icon}
+            }
+        }
+    } else {
+        rsx! {
+            div {
+                class: props.class,
+                style: style,
+                {props.icon}
+            }
         }
     }
 }
