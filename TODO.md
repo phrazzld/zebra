@@ -229,7 +229,7 @@
         1. Review research document.
     - **Depends‑on:** none
 
-- [ ] **T016 · Bugfix · P1: Fix dioxus dependency conflicts in desktop app**
+- [x] **T016 · Bugfix · P1: Fix dioxus dependency conflicts in desktop app**
     - **Context:** DIOXUS_DEPENDENCY_ISSUE.md
     - **Action:**
         1. Analyze the dependency conflict in zebra_desktop.
@@ -246,7 +246,7 @@
         3. Test desktop app functionality.
     - **Depends‑on:** [T001]
 
-- [ ] **T017 · Bugfix · P1: Fix webapp build issues with WebAssembly**
+- [x] **T017 · Bugfix · P1: Fix webapp build issues with WebAssembly**
     - **Context:** TASK_T012_COMPLETION.md
     - **Action:**
         1. Analyze the webpack configuration and Node.js compatibility issues.
